@@ -13,6 +13,7 @@ import {NavigationActions} from 'react-navigation';
 import {db, auth} from '../config';
 import Home from './Home';
 import Dashboard from './Dashboard';
+import Splash from './Splash';
 
 export default class SignForm extends Component {
     state = {
@@ -29,7 +30,7 @@ export default class SignForm extends Component {
         auth.signInWithEmailAndPassword(email, password)
         .then(function() {
             console.log('success signing in!');
-            navigate('Dashboard', {name: Dashboard})
+            navigate('Splash', {name: Splash})
         }).catch(function(error) {
             if(error) {
                 var errorCode = error.code;

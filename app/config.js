@@ -10,3 +10,4 @@ let firebaseConfig = {
 Firebase.initializeApp(firebaseConfig);
 exports.db = Firebase.firestore();
 exports.auth = Firebase.auth();
+exports.fb = Firebase;

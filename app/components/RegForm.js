@@ -11,6 +11,7 @@ import {
 import {db, auth} from '../config';
 
 import Dashboard from './Dashboard';
+import Splash from './Splash';
 import Home from './Home';
 
 export default class RegForm extends Component {
@@ -48,13 +49,13 @@ export default class RegForm extends Component {
                 email: newUser.email,
                 createdAt: new Date().toISOString(),
                 userId,
-                locations: {}
+                locations: []
             };
             return db.doc(`/users/${newUser.email}`).set(userCredentials);
         })
         .then(() => {
             console.log("success!");
-            navigate('Dashboard', {name: Dashboard})
+            navigate('Splash', {name: Splash});
         })
         .catch(err => {
             console.log(err);

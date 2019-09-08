@@ -10,11 +10,14 @@ import {
 
 import {db, auth} from '../config';
 
+import LocationObj from './LocationObj';
+
 export default class Home extends Component {
     state = {
         userName: '',
         email: '',
-        name: ''
+        name: '',
+        locations: []
     }
     componentDidMount() {
         this.getUserDetails(auth.currentUser.email);
@@ -22,6 +25,7 @@ export default class Home extends Component {
     componentDidUpdate() {
         console.log('updated!');
         console.log(this.state.name);
+        console.log("the state is ", this.state.locations);
     }
     getUserDetails(usrEmail) {
         const {navigate} = this.props.navigation;
@@ -32,8 +36,13 @@ export default class Home extends Component {
                 this.setState({
                     userName: doc.data().userName,
                     name: doc.data().fullName,
-                    email: doc.data().email
+                    email: doc.data().email,
                 });
+                for(var i = 0; i<doc.data().locations.length; i++) {
+                    this.setState({
+                        locations: [...this.state.locations, doc.data().locations[i]]
+                    })
+                }
             } else {
                 console.log('no such document');
                 navigate('Home', {name: Home});
